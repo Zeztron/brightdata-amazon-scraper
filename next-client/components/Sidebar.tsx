@@ -22,7 +22,7 @@ const Sidebar = () => {
           Scraping the Unscrappable
         </h2>
       </div>
-      <ul className="flex flex-col gap-2 py-2 overflow-x-auto">
+      <ul className="flex flex-col gap-2 py-2">
         {snapshot?.docs.map((doc) => (
           <SidebarRow key={doc.id} doc={doc} />
         ))}
