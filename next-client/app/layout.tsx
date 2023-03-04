@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import './globals.css';
+import ClientProvider from '@/components/ClientProvider';
 
 export const metadata = {
   title: 'Create Next App',
@@ -16,12 +17,14 @@ export default function RootLayout({
     <html lang="en">
       {/* Sidebar */}
       <body className="flex bg-[#f7fbff] h-screen">
-        <Sidebar />
-        <main className="p-10 max-w-7xl w-full mx-auto overflow-y-auto">
-          {/* Header */}
-          <Header />
-          {children}
-        </main>
+        <ClientProvider>
+          <Sidebar />
+          <main className="p-10 max-w-7xl w-full mx-auto overflow-y-auto">
+            {/* Header */}
+            <Header />
+            {children}
+          </main>
+        </ClientProvider>
       </body>
     </html>
   );
