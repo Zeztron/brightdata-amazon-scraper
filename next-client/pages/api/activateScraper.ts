@@ -37,7 +37,7 @@ export default async function handler(
       search,
       start_eta,
       status: 'pending',
-      updatedAt: admin.firestore.Timestamp.now(),
+      updatedAt: start_eta,
     });
 
     return res.status(200).json({ collection_id, start_eta });
