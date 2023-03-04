@@ -1,12 +1,15 @@
 import * as admin from 'firebase-admin';
 import { adminDb } from '@/firebaseAdmin';
-import { NextResponse } from 'next/server';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export async function POST(req: Request) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     console.log('Submitting...');
 
-    const { search }: { search: string } = await req.json();
+    const { search }: { search: string } = req.body;
 
     console.log('SEARCH IS >>', search);
 
@@ -37,12 +40,10 @@ export async function POST(req: Request) {
       updatedAt: admin.firestore.Timestamp.now(),
     });
 
-    return NextResponse.json({ collection_id, start_eta });
+    return res.status(200).json({ collection_id, start_eta });
   } catch (error) {
     console.log('ERROR IS >>>', error);
 
-    return new Response(error.message, {
-      status: 500,
-    });
+    return res.status(500).json(error);
   }
 }
